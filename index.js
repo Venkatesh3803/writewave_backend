@@ -14,6 +14,9 @@ app.use(express.json())
 app.use(cors())
 const PORT = 8800;
 
+
+
+
 const connect = () => {
     try {
         mongoose.connect(process.env.MONGO_URL).then(console.log("connected sucessfully"))
@@ -33,3 +36,4 @@ app.use("/api/auth", AuthRoute)
 app.use("/api/user", UserRoute)
 app.use("/api/post", PostRoute)
 app.use("/api/comment", CommentRoute)
+

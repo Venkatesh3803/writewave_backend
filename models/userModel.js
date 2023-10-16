@@ -18,7 +18,13 @@ const userModel = new mongoose.Schema({
     profilePic: {
         type: String,
     },
-    city: {
+    livesIn: {
+        type: String,
+    },
+    status: {
+        type: String,
+    },
+    gender: {
         type: String,
     },
 }, { timestamps: true })

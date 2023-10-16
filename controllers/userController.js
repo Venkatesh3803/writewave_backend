@@ -33,10 +33,11 @@ export const getAllUsers = async (req, res) => {
 }
 
 export const getSingleUsers = async (req, res) => {
+
     try {
-        const currUser = await userModel.find({ email: req.user.email })
+        const currUser = await userModel.findById(req.params.id)
         if (!currUser) return res.status(401).send("You are not Authorized")
-        res.status(201).json(users)
+        res.status(201).json(currUser)
     } catch (error) {
         res.status(500).json(error.message)
     }

@@ -3,9 +3,9 @@ import { deleteUser, getAllUsers, getSingleUsers, updateUser } from "../controll
 import { verifyToken } from "../middleware/verifyjwt.js";
 const route = express.Router();
 
-route.patch("/", verifyToken, updateUser)
+route.patch("/:id", verifyToken, updateUser)
 route.delete("/:id", verifyToken, deleteUser)
 route.get("/", getAllUsers)
-route.get("/single", verifyToken, getSingleUsers)
+route.get("/single/:id", getSingleUsers)
 
 export default route

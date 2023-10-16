@@ -29,7 +29,7 @@ export const login = async (req, res) => {
 
         const token = jwt.sign({
             id: currUser._id, email: currUser.email
-        }, "venky", { expiresIn: "20m" })
+        }, "venky", { expiresIn: "24h" })
         const { password, ...info } = currUser._doc;
         res.status(200).json({ ...info, token })
 
