@@ -27,6 +27,9 @@ const userModel = new mongoose.Schema({
     gender: {
         type: String,
     },
+    profession: {
+        type: String,
+    },
 }, { timestamps: true })
 
 
