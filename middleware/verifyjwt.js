@@ -2,7 +2,8 @@ import jwt from "jsonwebtoken"
 
 
 export const verifyToken = async (req, res, next) => {
-    const token = req.headers.token.split(" ")[1];
+
+    const token = req.headers.authorization.split(" ")[1];
     try {
         if (!token) return res.status(401).send("You are not Authorized")
         jwt.verify(token, "venky", (error, user) => {
