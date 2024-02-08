@@ -28,7 +28,7 @@ export const updatePost = async (req, res) => {
 export const deletePost = async (req, res) => {
     try {
         const currPost = await postModel.findByIdAndDelete(req.params.id)
-        const comments = await commentModel.deleteMany({postId:req.params.id})
+        await commentModel.deleteMany({ postId: req.params.id })
         if (!currPost) return res.status(401).send("You are not Authorized")
         res.status(200).json("Deleted Sucessfully")
     } catch (error) {
@@ -39,6 +39,7 @@ export const deletePost = async (req, res) => {
 
 export const getAllPosts = async (req, res) => {
     let qCategory = req.query.category
+    let search = req.query.search
     let userId = req.query.userId
     try {
         let post
@@ -46,6 +47,8 @@ export const getAllPosts = async (req, res) => {
             post = await postModel.find({ category: qCategory })
         } else if (userId) {
             post = await postModel.find({ userId: userId })
+        } else if (search) {
+            post = await postModel.find({ title: { $regex: search, $options: 'i' } })
         } else {
             post = await postModel.find()
         }
