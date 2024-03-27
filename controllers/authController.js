@@ -24,7 +24,7 @@ export const login = async (req, res) => {
         const currUser = await userModel.findOne({ email: req.body.email })
         if (!currUser) return res.status(401).send("User does not exist")
 
-        const verifyPass = await bycrpt.compareSync(req.body.password, currUser.password)
+        const verifyPass = await bycrpt.compare(req.body.password, currUser.password)
         if (!verifyPass) return res.status(404).send("Invalid Credentials")
 
         const token = jwt.sign({

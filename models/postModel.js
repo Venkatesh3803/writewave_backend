@@ -19,6 +19,9 @@ const postModel = new mongoose.Schema({
     shortDesc: {
         type: String,
     },
+    location: {
+        type: String,
+    },
     category: {
         type: String,
         required: true

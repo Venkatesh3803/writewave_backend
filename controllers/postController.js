@@ -38,20 +38,13 @@ export const deletePost = async (req, res) => {
 
 
 export const getAllPosts = async (req, res) => {
-    let qCategory = req.query.category
-    let search = req.query.search
-    let userId = req.query.userId
+    const q = req.query;
+    const filters = {
+        ...(q.category && { category: q.category }),
+        ...(q.search && { title: { $regex: q.search, $options: "i" } }),
+    };
     try {
-        let post
-        if (qCategory) {
-            post = await postModel.find({ category: qCategory })
-        } else if (userId) {
-            post = await postModel.find({ userId: userId })
-        } else if (search) {
-            post = await postModel.find({ title: { $regex: search, $options: 'i' } })
-        } else {
-            post = await postModel.find()
-        }
+        const post = await postModel.find(filters).sort({ createdAt: -1 })
 
         res.status(201).json(post)
     } catch (error) {
